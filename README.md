@@ -3,102 +3,119 @@ Machine learning project to predict customer churn using an e-commerce dataset. 
 
 **Ecommerce Churn Prediction**
 
-Predicting customer churn using machine learning on an e-commerce dataset.
-This project includes full EDA, preprocessing, feature engineering, model training, evaluation, and deployment artifacts.
+Machine learning project to predict customer churn using an e-commerce dataset.
+Includes full EDA, preprocessing, feature engineering, modeling (XGBoost), evaluation, and saved production-ready artifacts.
 
 **Project Overview**
 
-Customer churn is a critical KPI in e-commerce.
-The goal of this project is to build a predictive model that identifies customers who are likely to stop using the platform.
+Customer churn is a key metric in e-commerce: losing customers means losing recurring revenue.
 
-This enables businesses to create targeted retention strategies and reduce revenue loss.
+This project builds a predictive model that identifies users likely to churn so the business can execute proactive retention strategies.
 
 **Main Steps in This Project**
-**Data Understanding & Cleaning**
 
-Checked dataset shape and variable types
+**1. Data Understanding & Cleaning**
 
+**Actions Performed**
+
+Inspected dataset shape and variable types
 Identified missing values
 
 Imputed:
-
 Median for numeric features
 Mode for categorical features
-Removed irrelevant identifiers (e.g., CustomerID)
 
-**Exploratory Data Analysis (EDA)**
+Removed irrelevant identifiers:
+CustomerID
 
-Performed extensive visual and statistical analysis:
-Churn distribution
-Categorical vs Churn visualizations
-Numerical vs Churn boxplots
+**Purpose**
+
+Ensures the data is complete, consistent, and ready for analysis/modeling.
+
+**2. Exploratory Data Analysis (EDA)**
+
+**Visual & Statistical Analysis**
+
+Distribution plots
+Churn proportion analysis
+Categorical vs. Churn (countplots)
+Numerical vs. Churn (boxplots)
 Correlation heatmap
-Outlier detection via boxplots
+Outlier detection across numeric features
 
-Key insights:
+**Key Insights**
 
-Customers with low tenure churn more.
-Customers who complained churn significantly more.
-Higher number of devices and address count increase churn probability.
+Lower tenure customers churn significantly more
+Customers who complain have a much higher churn rate
+More registered devices & addresses correlate with higher churn
 
-**Feature Engineering**
+**3. Feature Engineering**
 
-One-hot encoding of all categorical variables
-Min-Max scaling on numerical features
-Final dataset after encoding: 5630 rows × 31 columns
+**Transformations Applied**
 
-**Train/Test Split**
+One-hot encoding of categorical variables
+Min-Max scaling of all numerical variables
+Removed identifier columns
 
-80% training, 20% testing
-Stratified split to preserve churn ratio
-Training set: 4504 samples
-Test set: 1126 samples
+Final dataset size after encoding: 5630 × 31
 
-**Model Training & Evaluation**
+**Result**
 
-Trained multiple classification models:
+A fully numeric, model-ready dataset.
+
+**4. Train/Test Split**
+
+80% training (4504 samples)
+20% test (1126 samples)
+
+Stratification applied to preserve churn proportion
+
+**5. Model Training & Evaluation**
+
+Six models were trained and compared:
 
 Model	Accuracy	Precision	Recall	F1-score	AUC
 XGBoost	0.990	0.973	0.968	0.971	0.9989
 Random Forest	0.978	0.988	0.884	0.933	0.998
 Decision Tree	0.964	0.890	0.900	0.895	0.938
-AdaBoost	0.901	0.784	0.573	0.662	0.917
-Logistic Regression	0.794	0.443	0.852	0.583	0.885
-Naive Bayes	0.704	0.327	0.715	0.449	0.762
-⭐ Best Model: XGBoost
+AdaBoost	0.901	0.784	0.574	0.662	0.917
+Logistic Regression	0.794	0.444	0.853	0.584	0.885
+Naive Bayes	0.704	0.328	0.716	0.450	0.762
 
-Reasons:
+**Best Model: XGBoost**
 
+Highest Recall (critical in churn detection)
 Highest F1-score
-Highest Recall (critical for churn detection)
 Near-perfect AUC = 0.999
 Very low false negatives
+Strong generalization on test data
 
-**Model Interpretability**
+**6. Model Interpretability**
 
-Top predictive features:
+Top Predictive Features
 
-Tenure
-
+Tenure (shorter → more churn)
 Complain
+Order Category – Laptop & Accessory
+NumberOfAddress
+MaritalStatus_Single
+PreferredPaymentMode_E-wallet
+NumberOfDeviceRegistered
+DaySinceLastOrder
 
-Order Category (Laptop & Accessory)
+These features help guide business actionability and retention strategy.
 
-Number of Addresses
+**7. Deployment Artifacts**
 
-Marital Status
-
-**Deployment Artifacts**
-
-Saved for production use:
+The project includes saved files ready for production use:
 
 xgboost_churn_model.pkl
-
 scaler.pkl
 
-Can be loaded using Python to make churn predictions on new customers.
+These can be loaded in any Python environment to make churn predictions on new customers.
 
 **How to Run This Project**
+
 1. Install dependencies
 conda env create -f environment.yml
 conda activate churn-env
@@ -109,11 +126,11 @@ jupyter notebook Project1.ipynb
 **Technologies Used**
 
 Python
+Pandas / NumPy
 Scikit-Learn
 XGBoost
-Pandas / NumPy
 Matplotlib / Seaborn
-VisualCodeStudio
+Visual Studio Code
 Git & GitHub
 
 **Author**
